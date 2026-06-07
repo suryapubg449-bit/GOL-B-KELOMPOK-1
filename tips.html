@@ -1,0 +1,798 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GYMZONE</title>
+
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+
+    /* ===== NAVBAR (same as gymzone) ===== */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: #0d0d0d;
+      border-bottom: 2px solid skyblue;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+     .logo {
+  font-size: 1.6rem;
+  font-weight: 900;
+  font-family:Arial, Helvetica, sans-serif;
+  color: #fff;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.logo span {
+  color: skyblue;
+}
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight:750;
+      font-family:Arial, Helvetica, sans-serif;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: color 0.25s, background 0.25s;
+    }
+    .nav-links a:hover { color: skyblue; background: #1a1a1a; }
+    .nav-links a.active { color: skyblue; }
+    .logout-btn {
+      background: skyblue !important;
+      color: #0d0d0d !important;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 6px 16px;
+      transition: background 0.25s !important;
+    }
+    .logout-btn:hover { background: red !important; }
+
+        /* ===== PROFILE DROPDOWN ===== */
+    .profile-wrapper {
+      position: relative;
+    }
+    .profile-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #1a1a1a;
+      border: 1.5px solid skyblue;
+      border-radius: 50px;
+      padding: 5px 14px 5px 6px;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .profile-btn:hover {
+      background: #222;
+      box-shadow: 0 0 12px rgba(135,206,235,0.25);
+    }
+    .profile-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, skyblue, #0090c8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      color: #0d0d0d;
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+    .profile-name {
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .profile-chevron {
+      transition: transform 0.25s;
+      opacity: 0.7;
+    }
+    .profile-wrapper.open .profile-chevron {
+      transform: rotate(180deg);
+    }
+    .profile-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      background: #111;
+      border: 1.5px solid #2a2a2a;
+      border-radius: 12px;
+      min-width: 200px;
+      padding: 6px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(135,206,235,0.08);
+      z-index: 200;
+      animation: dropFade 0.18s ease;
+    }
+    @keyframes dropFade {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .profile-wrapper.open .profile-dropdown { display: block; }
+    .dropdown-header {
+      padding: 10px 12px 8px;
+      border-bottom: 1px solid #222;
+      margin-bottom: 4px;
+    }
+    .dropdown-header .dh-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .dropdown-header .dh-label {
+      font-size: 0.75rem;
+      color: #666;
+      margin-top: 1px;
+    }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: #ccc;
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .dropdown-item:hover {
+      background: #1e1e1e;
+      color: skyblue;
+    }
+    .dropdown-item svg { flex-shrink: 0; opacity: 0.8; }
+    .dropdown-divider {
+      height: 1px;
+      background: #222;
+      margin: 4px 0;
+    }
+    .dropdown-item.logout-item:hover {
+      background: rgba(255,50,50,0.1);
+      color: #ff5555;
+    }
+
+  /* TIPS HERO */
+    .tips-hero-section {
+      min-height: 100vh;
+      padding: 120px 8% 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .tips-hero-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .tips-hero-text h1 {
+      font-size: 52px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .tips-hero-text h1 span {
+      color: #38bdf8;
+    }
+
+    .tips-hero-text p {
+      color: #cbd5e1;
+      line-height: 1.8;
+      font-size: 15px;
+      max-width: 560px;
+    }
+
+    .tips-hero-img {
+      flex: 1;
+      min-width: 280px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .tips-hero-img img {
+      width: 100%;
+      max-width: 480px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(56,189,248,0.35);
+    }
+
+    /* TIPS CARDS SECTION */
+    .tips-cards-section {
+      padding: 20px 8% 80px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tips-cards-section h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+      color: #f1f5f9;
+      border-left: 4px solid #38bdf8;
+      padding-left: 16px;
+      width: 100%;
+    }
+
+    .tips-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    /* INDIVIDUAL TIP CARD */
+    .tip-card-v2 {
+      background: #1e293b;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tip-card-v2:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(56,189,248,0.15);
+    }
+
+    .tip-card-v2-header {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid rgba(56,189,248,0.2);
+    }
+
+    .tip-number-badge {
+      background: #38bdf8;
+      color: #0f172a;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .tip-card-v2-header h3 {
+      color: #f1f5f9;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .tip-card-v2-body {
+      padding: 22px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .tip-info-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .tip-info-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #38bdf8;
+    }
+
+    .tip-info-row p {
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .tip-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .tip-card-v2-footer {
+      padding: 16px 24px 24px;
+    }
+
+    .tip-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #38bdf8;
+      color: #0f172a;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .tip-btn:hover {
+      background: #0ea5e9;
+      transform: scale(1.03);
+    }
+
+    .tip-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: #0f172a;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .tips-hero-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 36px;
+      }
+      .tips-hero-text h1 {
+        font-size: 36px;
+      }
+      .tips-cards-section {
+        padding: 20px 5% 60px;
+      }
+      .tips-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0d0d0d;
+      color: #ccc;
+      padding: 60px 0 0;
+      font-family: 'Segoe UI', sans-serif;
+      border-top: 3px solid skyblue;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-logo-text {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .footer-logo-text span { color: skyblue; }
+    .footer-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+    .footer-socials { display: flex; gap: 12px; }
+    .footer-socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      color: #aaa;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .footer-socials a:hover {
+      background: blue;
+      color: #0d0d0d;
+      border-color: white;
+    }
+    .footer-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: skyblue;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+    }
+    .footer-title::after {
+      content: '';
+      display: none;
+      width: 30px;
+      height: 2px;
+      background: #f5a623;
+      margin-top: 6px;
+      border-radius: 2px;
+    }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s, padding-left 0.3s;
+      display: inline-block;
+    }
+    .footer-col ul li a:hover { color: skyblue; padding-left: 6px; }
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: #aaa;
+      font-size: 0.88rem;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .footer-contact li svg { flex-shrink: 0; color: skyblue; margin-top: 2px; }
+    .footer-divider {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #2e2e2e, transparent);
+    }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-logo-img { height: 40px; width: auto; opacity: 0.85; filter: brightness(1.2); }
+    .footer-bottom p { font-size: 0.8rem; color: #666; margin: 0; }
+    @media (max-width: 900px) {
+      .footer-container { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 560px) {
+      .footer-container { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+ <!-- NAVBAR -->
+  <nav>
+    <div class="logo"><span>GYM</span>ZONE</div>
+
+    <div class="nav-links">
+     <a href="gymzone.html">Pengertian GYM</a>
+      <a href="program.html">Jenis Jenis GYM</a>
+      <a href="manfaat.html">Manfaat GYM</a>
+      <a href="tips.html">Tips</a>
+      <a href="kontak.html">Kontak</a>
+
+      <!-- PROFILE DROPDOWN -->
+      <div class="profile-wrapper" id="profileWrapper">
+        <button class="profile-btn" onclick="toggleDropdown()">
+          <div class="profile-avatar" id="profileInitial">?</div>
+          <span class="profile-name" id="profileName">User</span>
+          <svg class="profile-chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </button>
+        <div class="profile-dropdown" id="profileDropdown">
+          <div class="dropdown-header">
+            <div class="dh-name" id="dropdownName">User</div>
+            <div class="dh-label">Member GymZone</div>
+          </div>
+          <a href="dashboard.html" class="dropdown-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+            Profil Saya
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item logout-item" onclick="doLogout()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5-5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            Logout
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    const userName = sessionStorage.getItem('gymzone_user') || 'User';
+    document.getElementById('profileName').textContent = userName;
+    document.getElementById('dropdownName').textContent = userName;
+    const initials = userName.split(' ').map(w => w[0]).slice(0,2).join('');
+    document.getElementById('profileInitial').textContent = initials || '?';
+
+    function toggleDropdown() {
+      document.getElementById('profileWrapper').classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+      const wrapper = document.getElementById('profileWrapper');
+      if (!wrapper.contains(e.target)) wrapper.classList.remove('open');
+    });
+    function doLogout() {
+      if (confirm('Apakah anda yakin ingin keluar?')) {
+        sessionStorage.removeItem('gymzone_user');
+        sessionStorage.removeItem('gymzone_email');
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
+
+
+ <!-- HERO -->
+  <section class="tips-hero-section">
+    <div class="tips-hero-text">
+      <h1>Tips Cara Menggunakan Alat <span>GYM</span> Yang Baik Dan Benar</h1>
+      <p>
+        Gym memiliki berbagai jenis alat olahraga yang dirancang untuk membantu meningkatkan kebugaran tubuh,
+        baik untuk melatih daya tahan jantung maupun memperkuat otot. Setiap alat memiliki fungsi dan manfaat
+        yang berbeda, sehingga penting untuk mengetahui cara penggunaannya dengan benar agar latihan menjadi
+        lebih efektif dan aman.
+      </p>
+    </div>
+    <div class="tips-hero-img">
+      <img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?q=80&w=1200&auto=format&fit=crop" alt="Fitness Tips">
+    </div>
+  </section>
+
+  <!-- TIPS CARDS -->
+  <section class="tips-cards-section">
+    <h2>Panduan Alat Gym</h2>
+
+    <div class="tips-cards-grid">
+
+      <!-- Treadmill -->
+      <div class="tip-card-v2">
+        <div class="tip-card-v2-header">
+          <span class="tip-number-badge">01</span>
+          <h3>Treadmill</h3>
+        </div>
+        <div class="tip-card-v2-body">
+          <div class="tip-info-row">
+            <span class="tip-info-label">Fungsi & Manfaat</span>
+            <p>Melatih jantung, meningkatkan stamina, dan membakar kalori secara efektif.</p>
+          </div>
+          <div class="tip-divider"></div>
+          <div class="tip-info-row">
+            <span class="tip-info-label">Cara Menggunakan</span>
+            <p>Naik ke treadmill, atur kecepatan awal, mulai dengan berjalan santai, lalu tingkatkan kecepatan sesuai kemampuan dengan postur tubuh tetap tegak.</p>
+          </div>
+        </div>
+        <div class="tip-card-v2-footer">
+          <a href="https://www.youtube.com/watch?v=SMwuQFCxwE8" class="tip-btn" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Lihat Tutorial
+          </a>
+        </div>
+      </div>
+
+      <!-- Sepeda Statis -->
+      <div class="tip-card-v2">
+        <div class="tip-card-v2-header">
+          <span class="tip-number-badge">02</span>
+          <h3>Sepeda Statis</h3>
+        </div>
+        <div class="tip-card-v2-body">
+          <div class="tip-info-row">
+            <span class="tip-info-label">Fungsi & Manfaat</span>
+            <p>Melatih kardio dan otot kaki tanpa memberikan tekanan berlebih pada sendi lutut (low-impact).</p>
+          </div>
+          <div class="tip-divider"></div>
+          <div class="tip-info-row">
+            <span class="tip-info-label">Cara Menggunakan</span>
+            <p>Duduk dengan posisi nyaman, letakkan kaki pada pedal, lalu kayuh secara stabil selama beberapa menit.</p>
+          </div>
+        </div>
+        <div class="tip-card-v2-footer">
+          <a href="https://www.youtube.com/watch?v=g3NV_Z1nZGY" class="tip-btn" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Lihat Tutorial
+          </a>
+        </div>
+      </div>
+
+      <!-- Elliptical Trainer -->
+      <div class="tip-card-v2">
+        <div class="tip-card-v2-header">
+          <span class="tip-number-badge">03</span>
+          <h3>Elliptical Trainer</h3>
+        </div>
+        <div class="tip-card-v2-body">
+          <div class="tip-info-row">
+            <span class="tip-info-label">Fungsi & Manfaat</span>
+            <p>Melatih otot seluruh tubuh (kaki dan tangan) sekaligus melatih kardio tanpa hentakan keras pada sendi.</p>
+          </div>
+          <div class="tip-divider"></div>
+          <div class="tip-info-row">
+            <span class="tip-info-label">Cara Menggunakan</span>
+            <p>Berdiri di atas pijakan kaki, pegang pegangan tangan, lalu gerakkan kaki dan tangan secara bersamaan secara berirama.</p>
+          </div>
+        </div>
+        <div class="tip-card-v2-footer">
+          <a href="https://www.youtube.com/watch?v=Ex4NfA909R0" class="tip-btn" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Lihat Tutorial
+          </a>
+        </div>
+      </div>
+
+      <!-- Leg Press -->
+      <div class="tip-card-v2">
+        <div class="tip-card-v2-header">
+          <span class="tip-number-badge">04</span>
+          <h3>Leg Press</h3>
+        </div>
+        <div class="tip-card-v2-body">
+          <div class="tip-info-row">
+            <span class="tip-info-label">Fungsi & Manfaat</span>
+            <p>Melatih kekuatan otot paha (quadriceps) dan bokong (glutes) secara optimal.</p>
+          </div>
+          <div class="tip-divider"></div>
+          <div class="tip-info-row">
+            <span class="tip-info-label">Cara Menggunakan</span>
+            <p>Duduk di kursi alat, letakkan kaki selebar bahu pada pijakan, dorong beban hingga kaki hampir lurus (jangan dikunci), lalu turunkan perlahan.</p>
+          </div>
+        </div>
+        <div class="tip-card-v2-footer">
+          <a href="https://www.youtube.com/watch?v=ZfYk2s-vmHA" class="tip-btn" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Lihat Tutorial
+          </a>
+        </div>
+      </div>
+
+      <!-- Lat Pulldown -->
+      <div class="tip-card-v2">
+        <div class="tip-card-v2-header">
+          <span class="tip-number-badge">05</span>
+          <h3>Lat Pulldown</h3>
+        </div>
+        <div class="tip-card-v2-body">
+          <div class="tip-info-row">
+            <span class="tip-info-label">Fungsi & Manfaat</span>
+            <p>Melatih otot punggung atas (latissimus dorsi) untuk memperbaiki postur tubuh.</p>
+          </div>
+          <div class="tip-divider"></div>
+          <div class="tip-info-row">
+            <span class="tip-info-label">Cara Menggunakan</span>
+            <p>Duduk dan pegang bar dengan kedua tangan lebih lebar dari bahu, tarik bar ke arah dada atas, lalu kembalikan perlahan ke posisi awal.</p>
+          </div>
+        </div>
+        <div class="tip-card-v2-footer">
+          <a href="https://www.youtube.com/watch?v=4WLfPb_uoBA" class="tip-btn" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Lihat Tutorial
+          </a>
+        </div>
+      </div>
+
+      <!-- Chest Press -->
+      <div class="tip-card-v2">
+        <div class="tip-card-v2-header">
+          <span class="tip-number-badge">06</span>
+          <h3>Chest Press</h3>
+        </div>
+        <div class="tip-card-v2-body">
+          <div class="tip-info-row">
+            <span class="tip-info-label">Fungsi & Manfaat</span>
+            <p>Melatih kekuatan otot dada, bahu bagian depan, dan otot lengan (triceps).</p>
+          </div>
+          <div class="tip-divider"></div>
+          <div class="tip-info-row">
+            <span class="tip-info-label">Cara Menggunakan</span>
+            <p>Duduk dengan punggung menempel pada sandaran, pegang handle alat, dorong ke depan hingga lengan hampir lurus, lalu kembali ke posisi awal secara perlahan.</p>
+          </div>
+        </div>
+        <div class="tip-card-v2-footer">
+          <a href="https://youtu.be/n8TOta_pfr4?si=w8B-woy3jMl-KHRi" class="tip-btn" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Lihat Tutorial
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  
+ <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+
+      <!-- Kolom 1: Logo & Deskripsi -->
+      <div class="footer-brand">
+       <div class="footer-logo-text"><span>GYM</span>ZONE</div>
+        <p class="footer-desc">
+          Platform GYM modern untuk membantu kamu tetap sehat, aktif, dan penuh semangat setiap hari.
+        </p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.31.975.975 1.247 2.242 1.31 3.608.058 1.266.069 1.646.069 4.849s-.011 3.584-.069 4.85c-.063 1.366-.335 2.633-1.31 3.608-.975.975-2.242 1.247-3.608 1.31-1.266.058-1.646.069-4.85.069s-3.584-.011-4.85-.069c-1.366-.063-2.633-.335-3.608-1.31-.975-.975-1.247-2.242-1.31-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.31-3.608C4.517 2.497 5.784 2.225 7.15 2.163 8.416 2.105 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.013 8.332 0 8.741 0 12c0 3.259.013 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.987 8.741 24 12 24s3.668-.013 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.059-1.28.072-1.689.072-4.948 0-3.259-.013-3.668-.072-4.948-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.013 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Kolom 2: Navigasi -->
+      <div class="footer-col">
+        <h4 class="footer-title">Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="loginnew.php">Login</a></li>
+          <li><a href="registernew.php">Register</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom 3: Tentang -->
+      <div class="footer-col">
+        <h4 class="footer-title">Tentang</h4>
+        <ul>
+          <li><a href="gymzone.html">Apa Itu GYM?</a></li>
+          <li><a href="program.html">Jenis Jenis GYM</a></li>
+          <li><a href="manfaat.html">Manfaat GYM</a></li>
+          <li><a href="tips.html">Tips</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom 4: Kontak -->
+      <div class="footer-col">
+        <h4 class="footer-title">Kontak</h4>
+        <ul class="footer-contact">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Jl. Mastrip, Jember, Jawa Timur
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            gymzone@polje.ac.id
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <img src="anjay.png" alt="Logo" class="footer-logo-img">
+      <p>&copy; 2026 Promosi Kesehatan &mdash; Jurusan Kesehatan, Politeknik Negeri Jember. All rights reserved.</p>
+    </div>
+
+  </footer>
+
+</body>
+</html>
+

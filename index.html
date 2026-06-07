@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GYMZONE</title>
+
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+    
+    /* ===== NAVBAR (same as gymzone) ===== */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: #0d0d0d;
+      border-bottom: 2px solid skyblue;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.logo span {
+  color: skyblue;
+}
+}
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+        font-weight:750;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: color 0.25s, background 0.25s;
+    }
+    .nav-links a:hover { color: skyblue; background: #1a1a1a; }
+    .nav-links a.active { color: skyblue; }
+    .logout-btn {
+      background: skyblue !important;
+      color: #0d0d0d !important;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 6px 16px;
+      transition: background 0.25s !important;
+    }
+    .logout-btn:hover { background: #0090c8 !important; }
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0d0d0d;
+      color: #ccc;
+      padding: 60px 0 0;
+      font-family: 'Segoe UI', sans-serif;
+      border-top: 3px solid white;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-logo-text {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .footer-logo-text span { color: skyblue; }
+    .footer-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+    .footer-socials { display: flex; gap: 12px; }
+    .footer-socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      color: #aaa;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .footer-socials a:hover {
+      background: blue;
+      color: #0d0d0d;
+      border-color: white;
+    }
+    .footer-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: skyblue;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+    }
+    .footer-title::after {
+      content: '';
+      display: none;
+      width: 30px;
+      height: 2px;
+      background: #f5a623;
+      margin-top: 6px;
+      border-radius: 2px;
+    }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s, padding-left 0.3s;
+      display: inline-block;
+    }
+    .footer-col ul li a:hover { color: skyblue; padding-left: 6px; }
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: #aaa;
+      font-size: 0.88rem;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .footer-contact li svg { flex-shrink: 0; color: skyblue; margin-top: 2px; }
+    .footer-divider {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #2e2e2e, transparent);
+    }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-logo-img { height: 40px; width: auto; opacity: 0.85; filter: brightness(1.2); }
+    .footer-bottom p { font-size: 0.8rem; color: #666; margin: 0; }
+    @media (max-width: 900px) {
+      .footer-container { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 560px) {
+      .footer-container { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+ <!-- NAVBAR -->
+  <nav>
+    <div class="logo"><span>GYM</span>ZONE</div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="loginnew.php">Login</a>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home" class="hero">
+
+    <div class="hero-text">
+      <h1>
+         Bingung Mau Mulai <span>Olahraga? </span>
+        Yuk, Kenali Dunia <span>GYM!</span>
+      </h1>
+
+      <p>
+        Platform GYM modern untuk membantu kamu
+        tetap sehat, aktif, dan penuh semangat setiap hari. Jika kamu ingin lebih lengkapnya silahkan klik tombol di bawah agar kamu dapet informasi yang lebih banyak.
+      </p>
+
+      <a href="loginnew.php" class="hero-btn">
+        Lihat Selengkapnya 
+      </a>
+    </div>
+
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop" alt="Sport">
+    </div>
+
+  </section>
+
+  
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+
+      <!-- Kolom 1: Logo & Deskripsi -->
+      <div class="footer-brand">
+        <div class="footer-logo-text">GYM<span>ZONE</span></div>
+        <p class="footer-desc">
+          Platform GYM modern untuk membantu kamu tetap sehat, aktif, dan penuh semangat setiap hari.
+        </p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.31.975.975 1.247 2.242 1.31 3.608.058 1.266.069 1.646.069 4.849s-.011 3.584-.069 4.85c-.063 1.366-.335 2.633-1.31 3.608-.975.975-2.242 1.247-3.608 1.31-1.266.058-1.646.069-4.85.069s-3.584-.011-4.85-.069c-1.366-.063-2.633-.335-3.608-1.31-.975-.975-1.247-2.242-1.31-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.31-3.608C4.517 2.497 5.784 2.225 7.15 2.163 8.416 2.105 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.013 8.332 0 8.741 0 12c0 3.259.013 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.987 8.741 24 12 24s3.668-.013 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.059-1.28.072-1.689.072-4.948 0-3.259-.013-3.668-.072-4.948-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.013 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Kolom 2: Navigasi -->
+      <div class="footer-col">
+        <h4 class="footer-title">Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="loginnew.php">Login</a></li>
+          <li><a href="registernew.php">Register</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom 3: Tentang -->
+      <div class="footer-col">
+        <h4 class="footer-title">Tentang</h4>
+        <ul>
+          <li><a href="registernew.php">Apa Itu GYM?</a></li>
+          <li><a href="registernew.php">Jenis Jenis GYM</a></li>
+          <li><a href="registernew.php">Manfaat GYM</a></li>
+          <li><a href="registernew.php">Tips</a></li>
+          <li><a href="registernew.php">Kontak</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom 4: Kontak -->
+      <div class="footer-col">
+        <h4 class="footer-title">Kontak</h4>
+        <ul class="footer-contact">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Jl. Mastrip, Jember, Jawa Timur
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            gymzone@polje.ac.id
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <img src="anjay.png" alt="Logo" class="footer-logo-img">
+      <p>&copy; 2026 Promosi Kesehatan &mdash; Jurusan Kesehatan, Politeknik Negeri Jember. All rights reserved.</p>
+    </div>
+
+  </footer>
+</body>
+</html>
